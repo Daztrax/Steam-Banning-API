@@ -144,8 +144,8 @@ namespace SteamBanningTool.App
                 int reportIdWidth = Math.Max("ReportID".Length, rows.Max(row => row.ReportId.Length));
                 int steamIdWidth = Math.Max("SteamID64".Length, rows.Max(row => row.SteamId.Length));
                 int appIdWidth = Math.Max("AppID".Length, rows.Max(row => row.AppId.Length));
-                int summaryWidth = Math.Max("Summary".Length, Math.Min(40, rows.Max(row => row.Summary.Length)));
-                int extraWidth = Math.Max("Details".Length, Math.Min(60, rows.Max(row => row.Extra.Length)));
+                int summaryWidth = Math.Max("Summary".Length, rows.Max(row => row.Summary.Length));
+                int extraWidth = Math.Max("Details".Length, rows.Max(row => row.Extra.Length));
 
                 var builder = new System.Text.StringBuilder();
                 builder.AppendLine(BuildHeader(indexWidth, reportIdWidth, steamIdWidth, appIdWidth, summaryWidth, extraWidth));
@@ -154,7 +154,7 @@ namespace SteamBanningTool.App
                 foreach(var row in rows)
                 {
                     builder.AppendLine(
-                        $"{Pad(row.Index, indexWidth)} | {Pad(row.ReportId, reportIdWidth)} | {Pad(row.SteamId, steamIdWidth)} | {Pad(row.AppId, appIdWidth)} | {Pad(TrimTo(row.Summary, summaryWidth), summaryWidth)} | {Pad(TrimTo(row.Extra, extraWidth), extraWidth)}"
+                        $"{Pad(row.Index, indexWidth)} | {Pad(row.ReportId, reportIdWidth)} | {Pad(row.SteamId, steamIdWidth)} | {Pad(row.AppId, appIdWidth)} | {Pad(row.Summary, summaryWidth)} | {Pad(row.Extra, extraWidth)}"
                     );
                 }
 
@@ -311,7 +311,7 @@ namespace SteamBanningTool.App
                 }
                 catch { }
 
-                extraParts.Add($"appdata: {TrimTo(compact, 80)}");
+                extraParts.Add($"appdata: {compact}");
             }
 
             return extraParts.Count == 0 ? "-" : string.Join(" | ", extraParts);
@@ -354,16 +354,6 @@ namespace SteamBanningTool.App
         private static string Pad(string value, int width)
         {
             return value.PadRight(width);
-        }
-
-        private static string TrimTo(string value, int maxWidth)
-        {
-            if(value.Length <= maxWidth)
-            {
-                return value;
-            }
-
-            return maxWidth <= 1 ? value[..1] : value[..(maxWidth - 1)] + "…";
         }
     }
 }
