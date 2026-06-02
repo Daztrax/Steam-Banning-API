@@ -275,16 +275,16 @@ namespace SteamBanningTool.App
             var extraParts = new List<string>();
 
             string? gm = GetStringValue(element, "gamemode");
-            if(!string.IsNullOrWhiteSpace(gm)) extraParts.Add($"GM: {gm}");
+            if(!string.IsNullOrWhiteSpace(gm)) extraParts.Add($"Gamemode: {gm}");
 
             string? sev = GetStringValue(element, "severity");
             if(!string.IsNullOrWhiteSpace(sev)) extraParts.Add($"Sev: {sev}");
 
             string? heuristic = GetStringValue(element, "heuristic");
-            if(!string.IsNullOrWhiteSpace(heuristic)) extraParts.Add($"Heur: {FormatBoolSpanish(heuristic)}");
+            if(!string.IsNullOrWhiteSpace(heuristic)) extraParts.Add($"Heuristic: {FormatBoolSpanish(heuristic)}");
 
             string? detection = GetStringValue(element, "detection");
-            if(!string.IsNullOrWhiteSpace(detection)) extraParts.Add($"Detec: {FormatBoolSpanish(detection)}");
+            if(!string.IsNullOrWhiteSpace(detection)) extraParts.Add($"Detection: {FormatBoolSpanish(detection)}");
 
             string? playerreport = GetStringValue(element, "playerreport");
             if(!string.IsNullOrWhiteSpace(playerreport)) extraParts.Add($"PlayerReported: {FormatBoolSpanish(playerreport)}");
